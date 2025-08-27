@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title data-bn="জন্ম নিবন্ধন ফরম — প্রফেশনাল" data-en="Birth Registration Form — Professional">জন্ম নিবন্ধন ফরম — প্রফেশনাল</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bangla:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+    :root{
+      --bg1:#f3f7ff; --bg2:#eef5ff; --card:#ffffff; --primary:#3b82f6; --ok:#10b981; --danger:#ef4444;
+      --muted:#6b7280; --ink:#0f172a; --ring:rgba(59,130,246,.35);
+      --shadow:0 8px 28px rgba(15,23,42,.10); --shadow-strong:0 20px 60px rgba(2,6,23,.20);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Noto Sans Bangla","Inter",system-ui;
+      background: linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--ink);padding:20px;}
+    .wrap{max-width:1100px;margin:0 auto}
+    header{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+    .brand h1{margin:0;font-size:21px;color:var(--primary);font-weight:700}
+    .brand p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .logo{font-size:28px;color:var(--primary);}
+    .lang-toggle{margin-left:auto;display:flex;align-items:center;gap:8px}
+    .lang-toggle .pill{display:flex;align-items:center;border:1px solid #e6e9ef;background:#fff;border-radius:999px;padding:3px;box-shadow:var(--shadow)}
+    .lang-toggle button{border:0;background:transparent;padding:7px 12px;border-radius:999px;cursor:pointer;font-size:13px;font-weight:700}
+    .lang-toggle .active{background:var(--primary);color:#fff}
+    .card{background:var(--card);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .field-wrap{display:flex;flex-direction:column;gap:6px}
+    label{font-size:13px;font-weight:700;color:#0b1220}
+    input, select, textarea{width:100%;padding:12px;border:1px solid #e6e9ef;border-radius:10px;font-size:14px;transition:border-color .15s ease, box-shadow .15s ease}
+    input:focus, select:focus, textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--ring)}
+    textarea{min-height:80px;resize:vertical}
+    input.error, select.error, textarea.error{border-color:var(--danger)}
+    .error-message{color:var(--danger);font-size:12px;display:none}
+    input.error + .error-message, select.error + .error-message, textarea.error + .error-message{display:block}
+    
+    /* বার কোড ফিল্ড স্টাইল */
+    .input-with-button {
+      position: relative;
+    }
+    .input-with-button input {
+      padding-right: 80px;
+    }
+    .input-button {
+      position: absolute;
+      right: 6px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .input-button:hover {
+      background: #37ff00;
+      transform:translateY(-10px);
+    }
+    
+    /* উন্নত বাটন স্টাইলিং */
+    .actions{grid-column:1/-1;display:flex;flex-wrap:nowrap;gap:12px;justify-content:center;margin-top:16px}
+    .btn{border:0;padding:14px 18px;border-radius:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.3s ease;min-width:0;flex-shrink:1;flex-grow:0;flex-basis:auto;white-space:nowrap;font-size:15px}
+    .btn:hover{transform:translateY(-10px);box-shadow:0 10px 20px rgba(0,0,0,0.15)}
+    .btn:active{transform:translateY(1px)}
+    .btn-download{background:linear-gradient(90deg,var(--primary),#2563eb);color:#fff;box-shadow:0 4px 14px rgba(37, 99, 235, 0.4)}
+    .btn-download:hover{box-shadow:0 8px 22px rgba(37, 99, 235, 0.5)}
+    .btn-preview{background:linear-gradient(90deg,var(--ok),#059669);color:#fff;box-shadow:0 4px 14px rgba(16, 185, 129, 0.4)}
+    .btn-preview:hover{box-shadow:0 8px 22px rgba(16, 185, 129, 0.5)}
+    .btn-reset{background:linear-gradient(90deg,#f97316,#ef4444);color:#fff;box-shadow:0 4px 14px rgba(239, 68, 68, 0.4)}
+    .btn-reset:hover{box-shadow:0 8px 22px rgba(239, 68, 68, 0.5)}
+    
+    /* মোবাইল ডিভাইসের জন্য রেসপনসিভ স্টাইল */
+    @media (max-width: 768px) {
+      .form-grid{grid-template-columns:1fr}
+      .input-button {
+        padding: 5px 8px;
+        font-size: 10px;
+      }
+      .input-with-button input {
+        padding-right: 70px;
+      }
+      .actions{flex-wrap: nowrap; overflow-x: auto; justify-content: space-between; gap: 10px; padding: 5px 0}
+      .btn{padding: 14px 16px; font-size: 14px; gap: 8px; flex: 1; min-width: 120px; justify-content: center}
+      .btn i{font-size: 16px}
+      .btn span{font-size: 14px; font-weight: 600}
+    }
+    
+    /* খুব ছোট স্ক্রিনের জন্য অতিরিক্ত অপ্টিমাইজেশন */
+    @media (max-width: 480px) {
+      .btn{min-width: 110px; padding: 12px 14px; font-size: 13px; gap: 6px}
+      .btn i{font-size: 15px}
+      .btn span{font-size: 13px}
+    }
+    
+    /* মাঝারি স্ক্রিনের জন্য */
+    @media (max-width: 640px) and (min-width: 481px) {
+      .btn{padding: 14px 16px; font-size: 14px}
+      .btn span{font-size: 14px}
+    }
+    
+    /* ট্যাবলেট এবং বড় মোবাইলের জন্য */
+    @media (max-width: 1024px) and (min-width: 769px) {
+      .btn{padding: 14px 18px; font-size: 15px}
+    }
+    
+    footer{text-align:center;color:var(--muted);font-size:13px;margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo"><i class="fa-solid fa-id-card"></i></div>
+      <div class="brand">
+        <h1 data-bn="জন্ম নিবন্ধন ফরম" data-en="Birth Registration Form">জন্ম নিবন্ধন ফরম</h1>
+        <p data-bn="গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — উদাহরণ ডেমো" data-en="People's Republic of Bangladesh — Example Demo">গণপ্রজাতন্ত্রী বাংলাদেশ সরকার — উদাহরণ ডেমো</p>
+      </div>
+      <div class="lang-toggle">
+        <div class="pill">
+          <button type="button" id="btnBN" class="active">বাংলা</button>
+          <button type="button" id="btnEN">English</button>
+        </div>
+      </div>
+    </header>
+
+    <div class="card">
+      <form id="regForm" class="form-grid" autocomplete="off">
+        <!-- 1. রেজিস্টার অফিস নাম ও ঠিকানা -->
+        <div class="field-wrap">
+            <label for="register-office" data-bn="রেজিষ্ট্রার অফিসের ঠিকানা" data-en="Register Office Address">রেজিষ্ট্রার অফিসের ঠিকানা</label>
+            <input id="register-office" class="name_English_text" type="text" data-ph-bn="ঢাকা, বাংলাদেশ" data-ph-en="Dhaka, Bangladesh" required>
+            <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+          </div>
+        <div class="field-wrap">
+          <label for="office-name" data-bn="রেজিষ্ট্রার অফিসের নাম" data-en="Upazila/Pourashava/City Corporation, Zila">রেজিষ্ট্রার অফিসের নাম</label>
+          <input id="office-name" class="name_English_text" type="text" data-ph-bn="উদাহরণ: ঢাকা উত্তর" data-ph-en="e.g., Dhaka North" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 2. রেজিস্ট্রেশন নাম্বার ও লিঙ্গ -->
+        <div class="field-wrap">
+          <label for="birth-reg-no" data-bn="রেজিষ্ট্রেশন নাম্বার:- [১৭-সংখ্যা]" data-en="Birth Registration Number (17-digit)">রেজিষ্ট্রেশন নাম্বার</label>
+          <input id="birth-reg-no" type="text" data-ph-bn="197085305874160258" data-ph-en=" number" maxlength="17" required>
+          <div class="error-message" data-bn="ঠিক ১৭ সংখ্যা দিতে হবে" data-en="Exactly 17 digits required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="gender" data-bn="জেন্ডার" data-en="Gender">জেন্ডার</label>
+          <select id="gender" required>
+            <option value="" data-bn="লিঙ্গ নির্বাচন করুন" data-en="Select Gender">লিঙ্গ নির্বাচন করুন</option>
+            <option value="male" data-bn="Male" data-en="Male">Male</option>
+            <option value="female" data-bn="Female" data-en="Female">Female</option>
+            <option value="other" data-bn="Other" data-en="Other">Other</option>
+          </select>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 3. রেজিস্ট্রেশন তারিখ ও ইস্যু তারিখ -->
+        <div class="field-wrap">
+          <label for="reg-date" data-bn="রেজিষ্ট্রেশনের তারিখ:- [DD/MM/YYYY]" data-en=" Date Of Registration:- [DD/MM/YYYY]">রেজিষ্ট্রেশনের তারিখ</label>
+          <input id="reg-date" class="date_kastomais" type="text" data-ph-bn="15/05/2000" data-ph-en="15/05/2000" required>
+          <div class="error-message" data-bn="সঠিক তারিখ লিখুন (DD/MM/YYYY)" data-en="Enter a valid date (DD/MM/YYYY)"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="issue-date" data-bn="ইস্যুর তারিখ:- [DD/MM/YYYY]" data-en=" Date Of Issuance:- [DD/MM/YYYY]">ইস্যুর তারিখ</label>
+          <input id="issue-date" type="text" class="date_kastomais" data-ph-bn="15/05/2000" data-ph-en="15/05/2000" maxlength="10" required>
+          <div class="error-message" data-bn="সঠিক তারিখ লিখুন (DD/MM/YYYY)" data-en="Enter a valid date (DD/MM/YYYY)"></div>
+        </div>
+
+        <!-- 4. বার কোড ও QR লিঙ্ক -->
+        <div class="field-wrap">
+          <label for="left-bar" data-bn="সিক্রেট সংখ্যা" data-en="Left Bar Code">বার কোড</label>
+          <div class="input-with-button">
+            <input id="left-bar" class="name_English_qurcood" type="text" data-ph-bn="RAHI" data-ph-en="RAHI" required>
+            <button type="button" class="input-button auto-fill-btn" data-target="left-bar" data-bn="অটো" data-en="Auto">অটো</button>
+          </div>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="qrlink" data-bn="কিউআর কোড লিঙ্ক" data-en="QR Link"></label>
+          <div class="input-with-button">
+            <input id="qrlink" type="text" data-ph-bn="https://bdris.gov.bd/certificate/verify?key" data-ph-en="https://bdris.gov.bd/certificate/verify?key" required>
+            <button type="button" class="input-button auto-fill-btn" data-target="qrlink" data-bn="অটো" data-en="Auto">অটো</button>
+          </div>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 5. জন্ম তারিখ ও শব্দে -->
+        <div class="field-wrap">
+          <label for="dob" data-bn="জন্ম তারিখ:- [DD/MM/YYYY]" data-en="Date of Birth:- [DD/MM/YYYY]">জন্ম তারিখ</label>
+          <div class="input-with-button">
+            <input id="dob" type="text" class="date_kastomais" data-ph-bn="15/05/2000" data-ph-en="15/05/2000" maxlength="10" required>
+            <button type="button" class="input-button Convert_Button" data-target="qrlink" data-bn="অটো" data-en="Auto">অটো</button>
+          </div>
+          <div class="error-message" data-bn="সঠিক তারিখ লিখুন (DD/MM/YYYY)" data-en="Enter a valid date (DD/MM/YYYY)"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="dob_words" data-bn="জন্ম তারিখ কথায় (ইংরেজি)" data-en="Date of Birth in Words"></label>
+          <div class="input-with-button">
+            <input id="dob_words" class="name_English_text" type="text" data-ph-bn="Twentieth of October Two Thousand" data-ph-en="Twentieth of October Two Thousand" required>
+            <button type="button" class="input-button Convert_Button" data-target="qrlink" data-bn="অটো" data-en="Auto">অটো</button>
+          </div>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 6. নাম -->
+        <div class="field-wrap">
+          <label for="name_bn" data-bn="নাম (বাংলা)" data-en="Name (Bangla)">নাম (বাংলা)</label>
+          <input id="name_bn" type="text" data-ph-bn="মোঃ আব্দুল্লাহ শেখ" data-ph-en="মোঃ আব্দুল্লাহ শেখ" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="name_en" data-bn="নাম (ইংরেজি)" data-en="Name (English)">নাম (ইংরেজি)</label>
+          <input id="name_en" class="name_English_text" type="text" data-ph-bn="Md. Abdullah Sheikh" data-ph-en="Md. Abdullah Sheikh" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 7. পিতার নাম -->
+        <div class="field-wrap">
+          <label for="father_bn" data-bn="পিতার নাম (বাংলা)" data-en="Father Name (Bangla)">পিতার নাম (বাংলা)</label>
+          <input id="father_bn" type="text" data-ph-bn="মোঃ হামিদুর রহমান" data-ph-en="মোঃ হামিদুর রহমান" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="father_en" data-bn="পিতার নাম (ইংরেজি)" data-en="Father Name (English)">Father Name (English)</label>
+          <input id="father_en" class="name_English_text" type="text" data-ph-bn="Md. Hamidur Rahman" data-ph-en="Md. Hamidur Rahman" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 8. মাতার নাম -->
+        <div class="field-wrap">
+          <label for="mother_bn" data-bn="মাতার নাম (বাংলা)" data-en="Mother Name (Bangla)">মাতার নাম (বাংলা)</label>
+          <input id="mother_bn" type="text" data-ph-bn="মোছাঃ রোকসানা আক্তার" data-ph-en="মোছাঃ রোকসানা আক্তার" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="mother_en" data-bn="মাতার নাম (ইংরেজি)" data-en="Mother Name (English)">Mother Name (English)</label>
+          <input id="mother_en" class="name_English_text" type="text" data-ph-bn="Mst. Roxana Akhter" data-ph-en="Mst. Roxana Akhter" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 9. পিতার জাতীয়তা -->
+        <div class="field-wrap">
+          <label for="father_nat_bn" data-bn="পিতার জাতীয়তা (বাংলা)" data-en="Father Nationality (Bangla)">পিতার জাতীয়তা (বাংলা)</label>
+          <input id="father_nat_bn" type="text" value="বাংলাদেশ" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="father_nat_en" data-bn="পিতার জাতীয়তা (ইংরেজি)" data-en="Father Nationality (English)">Father Nationality (English)</label>
+          <input id="father_nat_en" class="name_English_text" type="text" value="Bangladeshi" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 10. মাতার জাতীয়তা -->
+        <div class="field-wrap">
+          <label for="mother_nat_bn" data-bn="মাতার জাতীয়তা (বাংলা)" data-en="Mother Nationality (Bangla)">মাতার জাতীয়তা (বাংলা)</label>
+          <input id="mother_nat_bn" type="text" value="বাংলাদেশ" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="mother_nat_en" data-bn="মাতার জাতীয়তা (ইংরেজি)" data-en="Mother Nationality (English)">Mother Nationality (English)</label>
+          <input id="mother_nat_en" class="name_English_text" type="text" value="Bangladeshi" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 11. জন্মস্থান -->
+        <div class="field-wrap">
+          <label for="birthplace_bn" data-bn="জন্মস্থান শুধু জেলা (বাংলা)" data-en="Place of Birth district only (Bangla)">জন্মস্থান (বাংলা)</label>
+          <input id="birthplace_bn" type="text" data-ph-bn="জামালপুর" data-ph-en="জামালপুর" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="birthplace_en" data-bn="জন্মস্থান শুধু জেলা (ইংরেজি)" data-en="Place of Birth district only (English)">Birthplace (English)</label>
+          <input id="birthplace_en" class="name_English_text" type="text" data-ph-bn="Jamalpur" data-ph-en="Jamalpur" required>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- 12. ঠিকানা -->
+        <div class="field-wrap">
+          <label for="present_address" data-bn="স্থায়ী ঠিকানা (বাংলা)" data-en="Permanent Address (Bangla)">স্থায়ী ঠিকানা (বাংলা)</label>
+          <textarea id="present_address" data-ph-bn="বাড়ি-১২, রোড-৪, ঢাকা" data-ph-en="House-12, Road-4, Dhaka" required></textarea>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+        <div class="field-wrap">
+          <label for="permanent_address" data-bn="স্থায়ী ঠিকানা (ইংরেজি)" data-en="Permanent Address (English)">Permanent Address (English)</label>
+          <textarea id="permanent_address" class="name_English_text" data-ph-bn="গ্রাম-ডালিমগঞ্জ, পোস্ট-সাঘাটা, গাইবান্ংa" data-ph-en="Village-Dalimganj, PO-Saghata, Gaibandha" required></textarea>
+          <div class="error-message" data-bn="এই ঘরটি পূরণ করা বাধ্যতামূলক" data-en="This field is required"></div>
+        </div>
+
+        <!-- উন্নত বাটন -->
+        <div class="actions">
+          <button type="button" id="downloadBtn" class="btn btn-download"><i class="fa-solid fa-download"></i> <span data-bn="ডাউনলোড" data-en="Download">ডাউনলোড</span></button>
+          <button type="button" id="previewBtn" class="btn btn-preview"><i class="fa-solid fa-eye"></i> <span data-bn="প্রিভিউ" data-en="Preview">প্রিভিউ</span></button>
+          <button type="reset" class="btn btn-reset"><i class="fa-solid fa-rotate-right"></i> <span data-bn="রিসেট" data-en="Reset">রিসেট</span></button>
+        </div>
+      </form>
+    </div>
+
+    <footer data-bn="© ২০২৫ উদাহরণ — প্রফেশনাল ডেমো" data-en="© 2025 Example — Professional Demo">© ২০২৫ উদাহরণ — প্রফেশনাল ডেমো</footer>
+  </div>
+
+  <script>
+    // Language toggle
+    function $$all(sel, root=document){ return Array.from(root.querySelectorAll(sel)); }
+    const LANG_KEY = 'site_lang_v1';
+    const htmlEl = document.documentElement;
+    const btnBN = document.getElementById('btnBN');
+    const btnEN = document.getElementById('btnEN');
+
+    function applyLang(lang){
+      const isBN = lang === 'bn';
+      htmlEl.lang = isBN ? 'bn' : 'en';
+      btnBN.classList.toggle('active', isBN);
+      btnEN.classList.toggle('active', !isBN);
+
+      $$all('[data-bn]').forEach(el=>{
+        el.textContent = el.getAttribute(isBN ? 'data-bn' : 'data-en');
+      });
+      $$all('[data-ph-bn]').forEach(el=>{
+        el.placeholder = el.getAttribute(isBN ? 'data-ph-bn' : 'data-ph-en');
+      });
+      localStorage.setItem(LANG_KEY, lang);
+      const titleEl=document.querySelector('title');
+      if(titleEl){ titleEl.textContent=titleEl.getAttribute(isBN?'data-bn':'data-en'); }
+    }
+
+    btnBN.addEventListener('click', ()=>applyLang('bn'));
+    btnEN.addEventListener('click', ()=>applyLang('en'));
+
+    // Init
+    const saved = localStorage.getItem(LANG_KEY) || 'bn';
+    applyLang(saved);
+
+
+// তারিখ ফিল্ডগুলোর জন্য ইভেন্ট হ্যান্ডলার - শুধুমাত্র সঠিক তারিখ ইনপুটের অনুমতি দেবে
+document.querySelectorAll('.date_kastomais').forEach(field => {
+  field.addEventListener('input', function(e) {
+    // বাংলা সংখ্যাগুলো ইংরেজিতে রূপান্তর
+    let value = convertBengaliToEnglishDigits(e.target.value);
+    
+    // শুধুমাত্র সংখ্যা এবং স্ল্যাশ রাখুন
+    value = value.replace(/[^\d\/]/g, '');
+    
+    // DD/MM/YYYY ফরম্যাটে সীমাবদ্ধ করুন
+    if (value.length > 2 && value.charAt(2) !== '/') {
+      value = value.slice(0, 2) + '/' + value.slice(2);
+    }
+    if (value.length > 5 && value.charAt(5) !== '/') {
+      value = value.slice(0, 5) + '/' + value.slice(5);
+    }
+    
+    // 10টি অক্ষরের বেশি হতে দেবেন না (DD/MM/YYYY)
+    if (value.length > 10) {
+      value = value.slice(0, 10);
+    }
+    
+    // প্রতিটি অংশ আলাদাভাবে ভ্যালিডেট করুন
+    const parts = value.split('/');
+    if (parts[0] && parts[0].length === 2) {
+      let day = parseInt(parts[0], 10);
+      if (isNaN(day) || day < 1) parts[0] = '01';
+      if (day > 31) parts[0] = '31';
+      parts[0] = String(parts[0]).padStart(2, '0');
+    }
+    
+    if (parts[1] && parts[1].length === 2) {
+      let month = parseInt(parts[1], 10);
+      if (isNaN(month) || month < 1) parts[1] = '01';
+      if (month > 12) parts[1] = '12';
+      parts[1] = String(parts[1]).padStart(2, '0');
+    }
+    
+    if (parts[2] && parts[2].length === 4) {
+      let year = parseInt(parts[2], 10);
+      if (isNaN(year) || year < 1000) parts[2] = '1000';
+      if (year > 9999) parts[2] = '9999';
+    }
+    
+    // অংশগুলো আবার যুক্ত করুন
+    let newValue = parts.join('/');
+    if (newValue.length > value.length) {
+      newValue = newValue.slice(0, 10);
+    }
+    
+    // মাস অনুযায়ী দিনের সংখ্যা সীমাবদ্ধ করুন
+    if (newValue.length === 10) {
+      const [d, m, y] = newValue.split('/').map(Number);
+      const daysInMonth = new Date(y, m, 0).getDate();
+      if (d > daysInMonth) {
+        newValue = 
+          String(daysInMonth).padStart(2, '0') + '/' +
+          String(m).padStart(2, '0') + '/' +
+          String(y).padStart(4, '0');
+      }
+    }
+    
+    e.target.value = newValue;
+  });
+
+  field.addEventListener('blur', function(e) {
+    // তারিখ ফরম্যাট যাচাই করুন
+    if (e.target.value && !isValidDateFormat(e.target.value)) {
+      e.target.classList.add('error');
+    } else {
+      e.target.classList.remove('error');
+    }
+  });
+  
+  // কীপ্রেস ইভেন্ট দিয়ে ভুল কী প্রবেশ করা বন্ধ করুন
+  field.addEventListener('keypress', function(e) {
+    const char = String.fromCharCode(e.keyCode || e.which);
+    // শুধুমাত্র সংখ্যা এবং স্ল্যাশ (বাংলা সংখ্যাসহ) অনুমতি দিন
+    if (!/[\d০-৯\/]/.test(char)) {
+      e.preventDefault();
+    }
+  });
+});
+
+// তারিখ ফরম্যাট যাচাই ফাংশন (DD/MM/YYYY)
+function isValidDateFormat(dateString) {
+  const pattern = /^\d{2}\/\d{2}\/\d{4}$/;
+  if (!pattern.test(dateString)) return false;
+  
+  const [day, month, year] = dateString.split('/').map(Number);
+  
+  // মাস যাচাই (1-12)
+  if (month < 1 || month > 12) return false;
+  
+  // দিন যাচাই (1-31)
+  if (day < 1 || day > 31) return false;
+  
+  // সাল যাচাই (1000-9999)
+  if (year < 1000 || year > 9999) return false;
+  
+  // মাস অনুযায়ী দিনের সংখ্যা যাচাই
+  const daysInMonth = new Date(year, month, 0).getDate();
+  if (day > daysInMonth) return false;
+  
+  return true;
+}
+
+// বাংলা সংখ্যা থেকে ইংরেজি সংখ্যায় রূপান্তর ফাংশন
+function convertBengaliToEnglishDigits(input) {
+  const bengaliDigits = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+  return input.replace(/[০-৯]/g, (match) => {
+    return bengaliDigits.indexOf(match);
+  });
+}
+
+
+    // রেজিস্ট্রেশন নম্বর ফিল্ডের জন্য ইভেন্ট হ্যান্ডলার
+    const birthRegNoInput = document.getElementById('birth-reg-no');
+    birthRegNoInput.addEventListener('input', function(e) {
+      // বাংলা সংখ্যাগুলো ইংরেজিতে রূপান্তর
+      let value = convertBengaliToEnglishDigits(e.target.value);
+      
+      // শুধুমাত্র সংখ্যা রাখুন
+      value = value.replace(/\D/g, '');
+      
+      // ১৭ সংখ্যার বেশি হতে দেবেন না
+      if (value.length > 17) {
+        value = value.slice(0, 17);
+      }
+      
+      e.target.value = value;
+    });
+
+    // তারিখ ফিল্ডগুলোর জন্য ইভেন্ট হ্যান্ডলার
+    const dateFields = ['reg-date', 'issue-date', 'dob'];
+    dateFields.forEach(fieldId => {
+      const field = document.getElementById(fieldId);
+      field.addEventListener('input', function(e) {
+        // বাংলা সংখ্যাগুলো ইংরেজিতে রূপান্তর
+        let value = convertBengaliToEnglishDigits(e.target.value);
+        
+        // শুধুমাত্র সংখ্যা এবং স্ল্যাশ রাখুন
+        value = value.replace(/[^\d\/]/g, '');
+        
+        // স্বয়ংক্রিয়ভাবে স্ল্যাশ যোগ করুন
+        if (value.length === 2 && e.inputType !== 'deleteContentBackward') {
+          value += '/';
+        } else if (value.length === 5 && e.inputType !== 'deleteContentBackward') {
+          value += '/';
+        }
+        
+        e.target.value = value;
+      });
+
+      field.addEventListener('blur', function(e) {
+        // তারিখ ফরম্যাট যাচাই করুন
+        if (e.target.value && !isValidDateFormat(e.target.value)) {
+          e.target.classList.add('error');
+        } else {
+          e.target.classList.remove('error');
+        }
+      });
+    });
+
+    // ফর্ম ভ্যালিডেশন
+    const form = document.getElementById('regForm');
+    const allInputs = form.querySelectorAll('input, select, textarea');
+    
+    // সকল ফিল্ডে প্রয়োজনীয় বৈশিষ্ট্য যোগ করুন
+    allInputs.forEach(input => {
+      if (input.tagName !== 'BUTTON') {
+        input.setAttribute('required', 'true');
+        
+        input.addEventListener('input', function() {
+          this.classList.remove('error');
+        });
+      }
+    });
+
+    // ফর্ম সাবমিশন যাচাই
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      let isValid = true;
+      
+      // সকল ফিল্ড পূরণ হয়েছে কিনা যাচাই করুন
+      allInputs.forEach(input => {
+        if (input.hasAttribute('required') && !input.value.trim()) {
+          input.classList.add('error');
+          isValid = false;
+        }
+      });
+      
+      // রেজিস্ট্রেশন নম্বর ১৭ সংখ্যা কিনা যাচাই করুন
+      if (birthRegNoInput.value.length !== 17) {
+        birthRegNoInput.classList.add('error');
+        isValid = false;
+      }
+      
+      // তারিখ ফরম্যাট যাচাই করুন
+      dateFields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field.value && !isValidDateFormat(field.value)) {
+          field.classList.add('error');
+          isValid = false;
+        }
+      });
+      
+      if (isValid) {
+        alert('ফর্ম সফলভাবে জমা দেওয়া হয়েছে!');
+        // এখানে ডাউনলোড বা প্রিভিউ লজিক যোগ করুন
+      } else {
+        alert('দয়া করে সমস্ত প্রয়োজনীয় তথ্য সঠিকভাবে পূরণ করুন।');
+      }
+    });
+
+    // ডাউনলোড এবং প্রিভিউ বাটনে ইভেন্ট যোগ করুন
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+      form.dispatchEvent(new Event('submit'));
+    });
+
+    document.getElementById('previewBtn').addEventListener('click', function() {
+      form.dispatchEvent(new Event('submit'));
+    });
+
+    // বার কোড অটো ফিল বাটন - সমন্বিত সংস্করণ
+    const barcodeData = [
+      { code: "QIQT", link: "https://bdris.gov.bd/certificate/verify?key=QH/TGklWGsMlZxnenceXIyDa5Hn/HcMwJ9DHmBvx4suZENyGzvN74jIrhRC4cUhe" },
+      { code: "RHAI", link: "https://bdris.gov.bd/certificate/verify?key=jnvj3Gfd2Byg5EJDuEAw2l9a2ZF/MSNpnkq5L6RBGjBOrtxpuA/QBuAaJSWKohXo" },
+      { code: "ZDMIH", link: "https://bdris.gov.bd/certificate/verify?key=+btgelG1peORbr/HU26bU+6uNcB/8v4zG+Auc4/JYZ7wShCvWJTaKelXv+uYonFA" },
+
+      { code: "Z", link: "yx" },
+      { code: "H", link: "htyx" },
+      { code: "D", link: "https" },
+      { code: "ZZ", link: "https:x" },
+      { code: "O", link: "https://bdri" },
+      { code: "h", link: "https://bdris." },
+      { code: "l", link: "https://bdris.gov" },
+      { code: "y", link: "https://bdris.gov.bd/certx" },
+      { code: "x", link: "https://bdris.gov.bd/certificax" }
+    ];
+    
+    let currentIndex = 0;
+    
+    // অটো ফিল বাটন ইভেন্ট যোগ - সমন্বিত
+    document.querySelectorAll('.auto-fill-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        // দুটি ফিল্ডই একসাথে ভরাট হবে
+        document.getElementById('left-bar').value = barcodeData[currentIndex].code;
+        document.getElementById('qrlink').value = barcodeData[currentIndex].link;
+        
+        // পরের ডেটা সেট করার জন্য ইনডেক্স আপডেট করুন
+        currentIndex = (currentIndex + 1) % barcodeData.length;
+      });
+    });
+            
+   // Validate name field
+   document.querySelectorAll('.name_English_text').forEach(input => {
+    input.addEventListener('input', function() {
+      const pattern = /^[A-Za-z:;'"\-\s.,_]+$/;
+      if (!pattern.test(this.value)) {
+        // যেসব অক্ষর pattern এর বাইরে সেগুলো মুছে ফেলুন
+        this.value = this.value.replace(/[^A-Za-z:;'"\-\s.,_]/g, '');
+      }
+    });
+  });
+
+
+
+
+
+
+  document.querySelectorAll('.name_English_qurcood').forEach(input => {
+    input.addEventListener('input', function() {
+      const pattern = /^[A-Za-z0-9:;'"\-\s.,_]+$/;
+      if (!pattern.test(this.value)) {
+        // যেসব অক্ষর pattern এর বাইরে সেগুলো মুছে ফেলুন
+        this.value = this.value.replace(/[^A-Za-z:;'"/+\-\s.,_]/g, '');
+      }
+    });
+  });
+
+
+  </script>
+  <script src="birthDateConverter.js"></script>
+</body>
+</html>
